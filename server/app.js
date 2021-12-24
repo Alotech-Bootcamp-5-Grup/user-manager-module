@@ -3,7 +3,7 @@ const db = require("./models")
 const storedProcedures = require("./models/storedProcedures");
 const userRoute = require("./routes/user");
 const tokenRoute = require("./routes/token");
-
+const cors = require('cors')
 require('dotenv').config()
 
 const app = express()
@@ -15,6 +15,9 @@ storedProcedures()
 
 // Middlewares
 app.use(express.json());
+
+//Cors
+app.use(cors());
 
 // Rooters
 app.use("/user", userRoute);
