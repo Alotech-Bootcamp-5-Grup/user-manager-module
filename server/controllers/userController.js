@@ -44,6 +44,8 @@ exports.updateUser = async (req, res) => {
       message: error.details[0].message,
     });
   }
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(value.user_password, saltRounds);
   try {
     await db.sequelize
       .query('CALL updateUser (:current_user_id, :new_username, :new_user_name, :new_user_surname, :new_user_password, :new_user_email, :new_user_type)', {
@@ -52,7 +54,7 @@ exports.updateUser = async (req, res) => {
           new_username: value.username,
           new_user_name: value.user_name,
           new_user_surname: value.user_surname,
-          new_user_password: value.user_password,
+          new_user_password: hashedPassword,
           new_user_email: value.user_email,
           new_user_type: value.user_type
         }
