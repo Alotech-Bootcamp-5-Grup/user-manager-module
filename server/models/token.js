@@ -7,13 +7,13 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.TEXT,
     },
     ttl: {
-      type: Sequelize.DATE,
+      type: Sequelize.INTEGER,
     },
     user_id: {
       type: Sequelize.INTEGER,
     },
     user_ip: {
-      type: Sequelize.STRING(15),
+      type: Sequelize.STRING(60),
     }
   },{
     sequelize,

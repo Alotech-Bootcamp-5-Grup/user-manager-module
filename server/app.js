@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require("./models")
 const storedProcedures = require("./models/storedProcedures");
-const userRoute = require("./routes/user");
+const userRoute = require("./routes/userRoute");
 const cors = require('cors')
 require('dotenv').config()
 
