@@ -5,12 +5,12 @@ const router = express.Router();
 
 // Create a new Tutorial
 router.route("/")
-  .post(tokenMiddleware, user.createUser)
-  .get(tokenMiddleware, user.getListOfUsers);
+  .post(tokenMiddleware(['ADMIN']), user.createUser)
+  .get(tokenMiddleware(['ADMIN']), user.getListOfUsers);
 
 router.route("/:user_id")
-  .get(tokenMiddleware, user.getUserInfo)
-  .put(tokenMiddleware, user.updateUser)
-  .delete(tokenMiddleware, user.deleteUser);
+  .get(tokenMiddleware(['ADMIN', 'USER']), user.getUserInfo)
+  .put(tokenMiddleware(['ADMIN']), user.updateUser)
+  .delete(tokenMiddleware(['ADMIN']), user.deleteUser);
 
 module.exports = router;
