@@ -7,7 +7,7 @@ const cors = require('cors')
 require('dotenv').config()
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 // Generate tables and stored procedures
 db.sequelize.sync()
