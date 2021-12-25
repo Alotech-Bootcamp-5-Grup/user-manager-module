@@ -2,7 +2,6 @@ const express = require('express')
 const db = require("./models")
 const storedProcedures = require("./models/storedProcedures");
 const userRoute = require("./routes/user");
-const tokenRoute = require("./routes/token");
 const cors = require('cors')
 require('dotenv').config()
 
@@ -21,7 +20,6 @@ app.use(cors());
 
 // Rooters
 app.use("/user", userRoute);
-app.use("/token", tokenRoute);
 
 // Listen App
 app.listen(port, () => {
