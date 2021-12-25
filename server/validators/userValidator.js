@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 exports.createUserValidator = (data) => {
   const schema = Joi.object({
-    token: Joi.string().required(),
+    // token: Joi.string().required(),
     username: Joi.string().min(2).required(),
     user_name: Joi.string().min(2).required(),
     user_surname: Joi.string().min(2).required(),
