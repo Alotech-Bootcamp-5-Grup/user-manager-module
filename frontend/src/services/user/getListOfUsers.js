@@ -8,9 +8,8 @@ export default async function getListOfUsers() {
   try {
     const res = await axios({
       method: "get",
-      url: requestUrl + "user",
+      url: requestUrl + "user" + "?redirectURL=http://localhost:3021",
       headers: authHeader(),
-     
     })
     return res.data;
   } catch (error) {

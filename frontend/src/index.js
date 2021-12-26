@@ -4,15 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./Views/Auth/login";
-import HomePage from "./Views/Home/home-page";
 
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App/>} />
-      <Route path="auth/login" element={<Login />} />
     </Routes>
   </BrowserRouter>,
   rootElement

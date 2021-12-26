@@ -8,7 +8,7 @@ export default async function deleteUser(userId) {
   try {
     const res = await axios({
       method: "delete",
-      url: requestUrl + "user/" + userId,
+      url: requestUrl + "user/" + userId + "?redirectURL=http://localhost:3021",
       headers: authHeader(),
     })
     return res.data;

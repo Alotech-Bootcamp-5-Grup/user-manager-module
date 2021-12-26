@@ -8,7 +8,7 @@ export default async function createUser(data) {
   try {
     const res = await axios({
       method: "post",
-      url: requestUrl + "user",
+      url: requestUrl + "user" + "?redirectURL=http://localhost:3021",
       headers: authHeader(),
       data: data
     })
