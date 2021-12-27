@@ -91,6 +91,7 @@ exports.getUserInfo = async (req, res) => {
         user_id: req.params.user_id
       }
     })
+    // var user_id = req.params.user_id;
     res.status(200).json({ "status": "success", userInfo })
   } catch (err) {
     res.status(500).json({
@@ -111,3 +112,6 @@ exports.getListOfUsers = async (req, res) => {
     })
   }
 };
+
+
+
