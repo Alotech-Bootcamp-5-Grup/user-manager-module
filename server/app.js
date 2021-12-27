@@ -10,7 +10,7 @@ const port = process.env.PORT
 
 // Generate tables and stored procedures
 db.sequelize.sync()
-storedProcedures()
+// storedProcedures()
 
 // Middlewares
 app.use(express.json());
@@ -25,3 +25,8 @@ app.use("/user", userRoute);
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })
+
+
+module.exports = {
+  app: app
+}
