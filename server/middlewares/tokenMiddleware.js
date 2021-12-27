@@ -1,8 +1,10 @@
 const axios = require('axios');
 
+require('dotenv').config();
+
 module.exports = (role) => {
   return (req, res, next) => {
-    axios.get(`http://localhost:3010/token/?redirectURL=${req.query.redirectURL}`,{
+    axios.get(`${process.env.SSO_SERVER_URL}?redirectURL=${req.query.redirectURL}`,{
       headers: {"x-access-token":req.headers["x-access-token"]}
     })
     .then((rsp) => {
