@@ -89,8 +89,14 @@ exports.getUserInfo = async (req, res) => {
         user_id: req.params.user_id
       }
     })
-    // var user_id = req.params.user_id;
-    res.status(200).json({ "status": "success", userInfo })
+    const user = {
+      username: userInfo.username,
+      user_name: userInfo.user_name,
+      user_email: userInfo.user_email,
+      user_surname: userInfo.user_surname,
+      user_type: userInfo.user_type,
+    }
+    res.status(200).json({ "status": "success", user })
   } catch (err) {
     res.status(500).json({
       status: "fail",
@@ -110,6 +116,3 @@ exports.getListOfUsers = async (req, res) => {
     })
   }
 };
-
-
-
