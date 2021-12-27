@@ -1,7 +1,5 @@
 const db = require("../models");
 const validator = require("../validators/userValidator");
-const User = db.users;
-const Op = db.Sequelize.Op;
 const bcrypt = require('bcrypt');
 
 exports.createUser = async (req, res) => {
