@@ -1,1 +1,0 @@
-export const requestUrl = "http://localhost:3020/";
