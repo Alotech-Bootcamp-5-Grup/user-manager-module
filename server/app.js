@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require('cors')
-const dbUtils = require("./models/utils");
+const db = require("./models");
 const userRoute = require("./routes/userRoute");
 
 require('dotenv').config()
@@ -8,6 +8,8 @@ require('dotenv').config()
 const app = express()
 const port = process.env.PORT
 
+// db connection
+db.sequelize.sync();
 
 // Middlewares
 app.use(express.json());
@@ -19,12 +21,9 @@ app.use(cors());
 app.use("/user", userRoute);
 
 // Listen App
-dbUtils(()=>{
-  app.listen(port, () => {
-    console.log(`App listening at http://localhost:${port}`)
-  })
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`)
 })
-
 
 module.exports = {
   app: app
