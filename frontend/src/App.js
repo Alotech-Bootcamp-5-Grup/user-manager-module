@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import HomePage from './Views/Home/home-page';
 import isAccessTokenValid from './services/valid_access_token';
