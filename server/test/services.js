@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
-const axios = require('axios');
 
 const sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -59,41 +58,3 @@ exports.createUser = async (user) => {
         console.log("createuser " + err);
     }
 };
-
-
-exports.authUser = async (username, password) => {
-  /* const url = "http://localhost:3010?redirectURL=http://localhost:3011";
-  const params = JSON.stringify({
-    "username": username,
-    "user_password": password
-  });
-  const response = await axios.post(url, params, {
-    "headers": {
-      "content-type": "application/json",
-    },
-  }) */
-  console.log(username, password)
-  const res = await axios({
-    method: "post",
-    url: 'http://localhost:3010?redirectURL=http://localhost:3011',
-    data: JSON.stringify({'username': username, 'user_password': password}),
-    headers: { 'Content-Type': 'application/json' },
-  })
-  console.log(res.data);
-  return res.data;
-};
-
-/* 
-exports.fetchRequest = async () => {
-  const response = await fetch('http://localhost:3010?redirectURL=http://localhost:3011', {
-    method: 'post',
-    body: JSON.stringify({
-      "username": username,
-      "user_password": password
-    }),
-    headers: { 'Content-Type': 'application/json' }
-  });
-  const data = await response.json();
-  console.log("fetchRequest " + data);
-}
- */
