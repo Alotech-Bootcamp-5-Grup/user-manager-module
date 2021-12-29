@@ -5,6 +5,8 @@ Bu uygulama, Patika'nın düzenlediği AloTech Fullstack Bootcamp'i bitirme proj
 #### Grup - 5
 > Eren Tanrıverdioğlu - Furkan Aktaş - Parahat Nepesov - Timur Turbil
 
+## Projenin Mimarisi
+![project architecture](https://github.com/Alotech-Bootcamp-5-Grup/user-manager-module/blob/main/project_analysis.jpg)
 ## Modülün İşlevi
 User Manager Module, veritabanındaki `users` tablosu üzerinde CRUD işlemleri yapmılmasını sağlar. Her adımda, endpoint'lere gelen isteklerde gönderilen token'ı SSO Authorization Servisi'ne göndererek yetki ve doğruluk kontrolü yapar. CRUD işlemleri için önceden tanımlanmış olan Stored Procedure'lara istek gönderir.
 
