@@ -71,15 +71,12 @@ export default function HomePage() {
   const addSelectedUsers = (user) => {
     setUpdateUserId(user.id);
     setUpdateUserInfo(user);
-    console.log(user)
     if (selectedUserIds.includes(user.id)) {
       removeItemFromAnArray(selectedUserIds, user.id);
-      console.log(selectedUserIds)
     } else {
       var arr = selectedUserIds;
       arr.push(user.id);
       setSelectedUserIds(arr);
-      console.log(selectedUserIds)
     }
   }
   const deleteUserFunction = () => {
@@ -109,6 +106,8 @@ export default function HomePage() {
   const setPasswordFunction = (e) => {
     setPassword(e.target.value);
   };
+
+
 
 
   const updateUserInfoSetState = (e) => {
@@ -258,26 +257,28 @@ export default function HomePage() {
               backgroundColor: "white",
               padding: "20px",
               width: "600px",
-              // height: "300px",
               borderRadius: "10px",
             }}
           >
             {users.length > 0
               ? users.map((user, index) => {
-                return (
-                  <div style={{ borderStyle: "groove" }} key={index}>
-                    <AiOutlineUser />
-                    {' '}
-                    {user.user_name}
-                    {' '}
-                    {user.user_surname}
-                    <div style={{ display: "inline", float: "right" }}>
-                      <input
-                        type="checkbox"
-                        onChange={(event) => addSelectedUsers(user)}
-                      /></div>
-                  </div>
-                );
+                if (user.id != cookies.get('user_id')) {
+                  return (
+                    <div style={{ borderStyle: "groove" }} key={index}>
+                      <AiOutlineUser />
+                      {' '}
+                      {user.user_name}
+                      {' '}
+                      {user.user_surname}
+                      <div style={{ display: "inline", float: "right" }}>
+                        <input
+                          type="checkbox"
+                          onChange={(event) => addSelectedUsers(user)}
+                        /></div>
+                    </div>
+                  );
+                }
+
               })
               : "boşş"}
             <div className="form-item form-btns " style={{ marginTop: "50px" }}>

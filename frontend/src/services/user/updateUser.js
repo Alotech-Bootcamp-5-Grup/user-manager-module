@@ -5,7 +5,7 @@ export default async function updateUser(user) {
     try {
         const res = await axios({
             method: "put",
-            url: process.env.REACT_APP_USER_ROOT_URL + user['user_id'] + "?redirectURL=http://localhost:3021",
+            url: `${process.env.REACT_APP_USER_ROOT_URL}${user['user_id']}?redirectURL=${window.location.href}`,
             headers: authHeader(),
             data: user,
         })

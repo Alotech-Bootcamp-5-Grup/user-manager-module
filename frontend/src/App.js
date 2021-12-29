@@ -14,7 +14,6 @@ function App() {
       window.location.href = `${process.env.REACT_APP_SSO_CLIENT_URL}?redirectURL=${window.location.href}`;
     } else {
       isAccessTokenValid(access_token).then((response_data) => {
-        console.log(response_data)
         if (response_data.response && response_data.user_type === "ADMIN") {
           setState(true);
         }

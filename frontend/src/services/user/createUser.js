@@ -6,7 +6,7 @@ export default async function createUser(data) {
   try {
     const res = await axios({
       method: "post",
-      url: `http://localhost:3020/user?redirectURL=${window.location.href}`,
+      url: `${process.env.REACT_APP_USER_ROOT_URL}?redirectURL=${window.location.href}`,
       headers: authHeader(),
       data: data
     })
