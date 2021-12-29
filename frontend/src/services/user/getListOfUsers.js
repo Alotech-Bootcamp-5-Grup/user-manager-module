@@ -1,3 +1,4 @@
+import alertify from "alertifyjs";
 import axios from "axios";
 import { authHeader } from "../../helpers/auth-header";
 
@@ -10,6 +11,6 @@ export default async function getListOfUsers() {
     })
     return res.data;
   } catch (error) {
-    console.error(error.response.data);
+    alertify.error(error.data.message);
   }
 }

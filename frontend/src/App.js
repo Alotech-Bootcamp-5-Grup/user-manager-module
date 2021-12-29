@@ -27,12 +27,16 @@ function App() {
       {state ? <>
         <HomePage />
       </> : <>
-        "you don't have permission to view that site"
-        <button onClick={
-          () => {
-            cookies.remove('access_token');
-          }
-        }>set accesstoken null</button>
+      <p style={{backgroundColor: "grey", padding: "10px"}}>You do not have permission to access this page</p> 
+        <div className="form-item form-btns " style={{ margin: "15px", justifyContent: "center" }}>
+          <button className="form-btn form-btn-login login-btn btn-cursor" 
+          style={{ width: "20%" }}
+          onClick={
+            () => {
+              cookies.remove('access_token');
+            }
+          }>Remove AccessToken</button>
+        </div>
       </>}
     </div>
   );

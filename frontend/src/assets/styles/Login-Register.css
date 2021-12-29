@@ -55,7 +55,7 @@
   border-radius: 5px;
 }
 .login-btn {
-  width: 100% !important;
+  width: 100%;
 }
 .form-item .form-btn-login {
   text-decoration: none;
