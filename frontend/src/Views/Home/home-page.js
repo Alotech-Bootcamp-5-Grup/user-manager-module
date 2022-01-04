@@ -20,27 +20,35 @@ export default function HomePage() {
   const [selectedUserIds, setSelectedUserIds] = useState([]);
   const [updateUserInfo, setUpdateUserInfo] = useState({});
   const [updateUserId, setUpdateUserId] = useState(0);
+
+  // create user için bu model'i kullanılmaktadır.
   const [Modal, open, close, isOpen] = useModal("root", {
     preventScroll: true,
     closeOnOverlayClick: false,
   });
+  // user table için modal2 model'i kullanılmaktadır
   const [Modal2, open2, close2, isOpen2] = useModal("root", {
     preventScroll: true,
     closeOnOverlayClick: false,
   });
+  // update user için model3 kullanılmaktadır.
   const [Modal3, open3, close3, isOpen3] = useModal("root", {
     preventScroll: true,
     closeOnOverlayClick: false,
   });
+
+  // use effectte getListOfUsers servisini kullanarak tüm kullanıcılar alınır 
+  // ve users değişkenine set edilir.
   useEffect(() => {
-    getAndSetUser();
+    getAndSetUsers();
   }, []);
 
-  function getAndSetUser() {
+  function getAndSetUsers() {
     getListOfUsers().then((response_users) => {
       setUsers(response_users.userList);
     });
   }
+
   const createUserFunction = () => {
     var data = {
       "username": username,
@@ -51,7 +59,7 @@ export default function HomePage() {
       "user_type": userType,
     };
     createUser(data).then(() => {
-      getAndSetUser();
+      getAndSetUsers();
       setUserType("USER");
     });
   };
@@ -82,7 +90,7 @@ export default function HomePage() {
   const deleteUserFunction = () => {
     for (var i = 0; i < selectedUserIds.length; i++) {
       deleteUser(selectedUserIds[i]).then(() => {
-        getAndSetUser();
+        getAndSetUsers();
       });
     }
   };
@@ -107,9 +115,6 @@ export default function HomePage() {
     setPassword(e.target.value);
   };
 
-
-
-
   const updateUserInfoSetState = (e) => {
     var userInfo = updateUserInfo;
     userInfo[`${e.target.name}`] = e.target.value;
@@ -122,7 +127,7 @@ export default function HomePage() {
     userInfo["user_id"] = updateUserId;
     delete userInfo['id'];
     updateUser(userInfo).then(() => {
-      getAndSetUser();
+      getAndSetUsers();
     });;
   }
 
