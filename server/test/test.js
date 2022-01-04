@@ -68,8 +68,8 @@ describe("User Manager Modüle Tests", () => {
         // .field('myparam' , 'test')
         .set('content-type', 'application/json')
         .send({
-          username: "timur_admin",
-          user_password: "password_admin"
+          username: user2.username,
+          user_password: user2.user_password
         })
         .end(function (error, response, body) {
           commonHeaders['x-access-token'] = response.body.Access_Token;
@@ -157,6 +157,5 @@ describe("User Manager Modüle Tests", () => {
           assert.ok(response.body.userList.length === 3);
         });
     });
-  });
-  
+  });  
 });
