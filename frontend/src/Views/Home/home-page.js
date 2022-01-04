@@ -42,7 +42,6 @@ export default function HomePage() {
     });
   }
   const createUserFunction = () => {
-    setUserType("USER");
     var data = {
       "username": username,
       "user_name": firstName,
@@ -53,6 +52,7 @@ export default function HomePage() {
     };
     createUser(data).then(() => {
       getAndSetUser();
+      setUserType("USER");
     });
   };
 
@@ -260,7 +260,7 @@ export default function HomePage() {
               borderRadius: "10px",
             }}
           >
-            {users.length > 0
+            {users.length > 1
               ? users.map((user, index) => {
                 if (user.id != cookies.get('user_id')) {
                   return (
@@ -278,9 +278,10 @@ export default function HomePage() {
                     </div>
                   );
                 }
-
               })
-              : "boşş"}
+              : <div className="form-item form-btns " style={{ margin: "15px", justifyContent: "center" }}>
+                <button className="form-btn form-btn-login login-btn btn-cursor" style={{ width: "50%" }} onClick={open}>There is no any user create one</button>
+              </div>}
             <div className="form-item form-btns " style={{ marginTop: "50px" }}>
               <button
                 className="form-btn form-btn-login login-btn btn-cursor"
