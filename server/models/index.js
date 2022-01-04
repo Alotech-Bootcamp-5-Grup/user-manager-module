@@ -2,6 +2,7 @@ const Sequelize = require('sequelize')
 
 require('dotenv').config()
 
+// Veritabanı bağlantısını oluştur
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -13,11 +14,14 @@ const sequelize = new Sequelize(
   }
 );
 
+// Boş bir obje oluştur
 const db = {};
 
+// Sequelize metodlarını objeye ata
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+// Modelleri oluştur
 db.users = require("./user.js")(sequelize, Sequelize);
 db.tokens = require("./token.js")(sequelize, Sequelize);
 
@@ -26,7 +30,7 @@ db.users.hasMany(db.tokens, {
 });
 
 const createProcedures = async () => {
-  // Create User - Stored Procedure
+  // Kullanıcı Oluştur - Stored Procedure
   await db.sequelize.query("DROP PROCEDURE IF EXISTS createUser")
 
   let createUserQuery = "CREATE PROCEDURE `createUser`("
@@ -38,7 +42,7 @@ const createProcedures = async () => {
   createUserQuery += "new_user_email, new_user_type); END;"
   await db.sequelize.query(createUserQuery)
 
-  // Update User - Stored Procedure
+  // Kullanıcı Bilgilerini Güncelle - Stored Procedure
   await db.sequelize.query("DROP PROCEDURE IF EXISTS updateUser")
 
   let updateUserQuery = "CREATE PROCEDURE `updateUser`("
@@ -49,19 +53,20 @@ const createProcedures = async () => {
   updateUserQuery += "WHERE id=user_id; END;"
   await db.sequelize.query(updateUserQuery)
 
-  // Delete User - Stored Procedure
+  // Kullanıcı Sil - Stored Procedure
   await db.sequelize.query("DROP PROCEDURE IF EXISTS deleteUser")
   await db.sequelize.query("CREATE PROCEDURE `deleteUser`(user_id INT) BEGIN DELETE FROM users WHERE id=user_id; END;")
 
-  // Get List of Users - Stored Procedure
+  // Kullanıcı Listesini Çek - Stored Procedure
   await db.sequelize.query("DROP PROCEDURE IF EXISTS getListOfUsers")
   await db.sequelize.query("CREATE PROCEDURE `getListOfUsers`() BEGIN SELECT * FROM users; END;")
 
-  // Get User Info - Stored Procedure
+  // Kullanıcı Bilgilerini Çek - Stored Procedure
   await db.sequelize.query("DROP PROCEDURE IF EXISTS getUserInfo")
   await db.sequelize.query("CREATE PROCEDURE `getUserInfo`(user_id INT) BEGIN SELECT * FROM users WHERE id=user_id LIMIT 1; END;")
 }
 
+// Stored Procedureları oluştur
 createProcedures();
 
 module.exports = db;

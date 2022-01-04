@@ -9,22 +9,21 @@ require('dotenv').config()
 const app = express()
 const port = process.env.PORT
 
-// db connection
+// DB bağlantısı
 db.sequelize.sync();
 
-// create user if doesn't exist
+// Varsayılan kullancıyı oluştur
 createUserIfNotExist();
 
 // Middlewares
 app.use(express.json());
 
-//Cors
+// Cors
 app.use(cors());
 
-// Rooters
+// Routers
 app.use("/user", userRoute);
 
-// Listen App
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })

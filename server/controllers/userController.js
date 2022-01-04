@@ -2,6 +2,9 @@ const db = require("../models");
 const validator = require("../validators/userValidator");
 const bcrypt = require('bcrypt');
 
+// Stored Procedure aracılığıyla kullanıcı oluşturur
+// req.body'de gelen bilgileri Joi ile konrol eder
+// Parolayı Bcrypt kütüphanesiyle şifreler
 exports.createUser = async (req, res) => {
   const { value, error } = validator.createUserValidator(req.body);
   if (error) {
@@ -34,6 +37,10 @@ exports.createUser = async (req, res) => {
   }
 };
 
+// Stored Procedure aracılığıyla kullanıcı bilgilerini günceller
+// req.body'de gelen bilgileri Joi ile konrol eder
+// Parolayı Bcrypt kütüphanesiyle şifreler
+// Her istekte parola bilgisi gönderilmesi gerekir
 exports.updateUser = async (req, res) => {
   const { value, error } = validator.updateUserValidator(req.body);
   if (error) {
@@ -66,6 +73,7 @@ exports.updateUser = async (req, res) => {
   }
 };
 
+// Stored Procedure aracılığıyla kullanıcıyı siler
 exports.deleteUser = async (req, res) => {
   try {
     await db.sequelize.query("CALL deleteUser(:user_id)", {
@@ -82,6 +90,7 @@ exports.deleteUser = async (req, res) => {
   }
 };
 
+// Stored Procedure aracılığıyla kullanıcı bilgilerini çeker
 exports.getUserInfo = async (req, res) => {
   try {
     const [userInfo] = await db.sequelize.query("CALL getUserInfo(:user_id)", {
@@ -105,6 +114,7 @@ exports.getUserInfo = async (req, res) => {
   }
 };
 
+// Stored Procedure aracılığıyla kullanıcı listesini çeker
 exports.getListOfUsers = async (req, res) => {
   try {
     const userList = await db.sequelize.query("CALL getListOfUsers()")

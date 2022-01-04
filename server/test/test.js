@@ -7,6 +7,7 @@ const { deleteAllUsers, createUser, authUser, deleteTokens } = require("./servic
 chai.use(chaiHttp);
 
 describe("User Manager Modüle Tests", () => {
+  // Test için gerekli kullanıcılar
   var user1 = {
     username: "timur",
     user_name: "timur",
@@ -50,14 +51,18 @@ describe("User Manager Modüle Tests", () => {
     user_type: "USER",
   }
   before(async () => {
+    // Testler sırasında bir çakışma olmaması için veritabanındaki
+    // kullanıcıları silip önceden tanımlı kullanıcıları oluşturur
     await deleteAllUsers();
     await createUser(user1);
     await createUser(user2);
   });
+
   var commonHeaders = {
     "Content-Type": "application/json",
     "x-access-token": "",
   };
+
   describe("authUser Tests", () => {
     var host = "http://localhost:3010/";
     var path = "?redirectURL=http://localhost:3011";
@@ -65,13 +70,13 @@ describe("User Manager Modüle Tests", () => {
       chai
         .request(host)
         .post(path)
-        // .field('myparam' , 'test')
         .set('content-type', 'application/json')
         .send({
           username: user2.username,
           user_password: user2.user_password
         })
         .end(function (error, response, body) {
+          // Bu token, sonraki işlemlerde kullanılır
           commonHeaders['x-access-token'] = response.body.Access_Token;
           if (error) {
             done(error);
@@ -81,6 +86,7 @@ describe("User Manager Modüle Tests", () => {
         });
     });
   });
+
   describe("getUserInfo Tests", () => {
     it("test checks status success", function (done) {
       request(app)
@@ -157,5 +163,5 @@ describe("User Manager Modüle Tests", () => {
           assert.ok(response.body.userList.length === 3);
         });
     });
-  });  
+  });
 });

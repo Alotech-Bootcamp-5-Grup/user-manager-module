@@ -2,6 +2,8 @@ const axios = require('axios');
 
 require('dotenv').config();
 
+// Token bilgisini header'da SSO Auth Servisi'ne göndererek, isteği yapan
+// kullanıcının yetkili olup olmadığını kontrol eder
 module.exports = (role) => {
   return (req, res, next) => {
     axios.get(`${process.env.SSO_SERVER_URL}?redirectURL=${req.query.redirectURL}`,{

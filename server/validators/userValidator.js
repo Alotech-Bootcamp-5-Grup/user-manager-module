@@ -1,5 +1,7 @@
 const Joi = require("joi");
 
+// Oluşturulmak istenen kullanıcı için gönderilen bilgilerin
+// veritabanı ile uyumlu olup olmadığını kontrol eder
 exports.createUserValidator = (data) => {
   const schema = Joi.object({
     username: Joi.string().min(2).required(),
@@ -12,6 +14,8 @@ exports.createUserValidator = (data) => {
   return schema.validate(data);
 };
 
+// Güncellenmek istenen kullanıcı için gönderilen bilgilerin
+// veritabanı ile uyumlu olup olmadığını kontrol eder
 exports.updateUserValidator = (data) => {
   const schema = Joi.object({
     user_id: Joi.number().required(),

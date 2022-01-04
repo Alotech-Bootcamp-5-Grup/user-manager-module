@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 
+// Veritabanı bağlantısı oluşturur
 const sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
@@ -12,6 +13,7 @@ const sequelize = new Sequelize(
     }
 );
 
+// users tablosundaki tüm kayıtları siler
 exports.deleteAllUsers = async () => {
     try {
         await sequelize.query("DELETE FROM users");
@@ -20,6 +22,8 @@ exports.deleteAllUsers = async () => {
         console.log("users error ", err);
     }
 };
+
+// tokens tablosundaki tüm kayıtları siler
 exports.deleteTokens = async () => {
     try {
         await sequelize.query("DELETE FROM tokens");
@@ -35,6 +39,7 @@ const setAutoIncrement = async () => {
     }
 };
 
+// Stored Procedure aracılğıyla yeni kullanıcı oluşturur
 exports.createUser = async (user) => {
     try {
         const saltRounds = 10;
@@ -59,7 +64,7 @@ exports.createUser = async (user) => {
     }
 };
 
-
+// users tabanında kullanıcı mevcut değilse, varsayılan bir kullanici oluşturur
 exports.createUserIfNotExist = async () => {
     var user = {
         username: "sample_user",
@@ -94,6 +99,3 @@ exports.createUserIfNotExist = async () => {
         console.log("createuser " + err);
     }
 };
-
-
-
